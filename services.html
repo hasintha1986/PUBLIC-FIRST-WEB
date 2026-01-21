@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | KDJ DOOM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #050505; color: white; font-family: 'Rajdhani', sans-serif; cursor: none; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s; }
+        .glass-card:hover { transform: translateY(-10px); background: rgba(99, 102, 241, 0.1); border-color: #6366f1; }
+        
+        /* Copy previous styles for cursor here */
+        .cursor-dot, .cursor-outline { position: fixed; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 9999; }
+        .cursor-dot { width: 8px; height: 8px; background: #6366f1; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(99, 102, 241, 0.5); }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center glass-card bg-black">
+        <a href="index.html" class="text-2xl font-bold font-orbitron text-white">KDJ<span class="text-indigo-500">DOOM</span></a>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+            <a href="index.html" class="hover:text-indigo-400">Home</a>
+            <a href="about.html" class="hover:text-indigo-400">About</a>
+            <a href="services.html" class="text-indigo-500 font-bold">Services</a>
+            <a href="projects.html" class="hover:text-indigo-400">Projects</a>
+            <a href="contact.html" class="hover:text-indigo-400">Contact</a>
+        </div>
+    </nav>
+
+    <section class="min-h-screen pt-32 px-6 max-w-7xl mx-auto pb-20">
+        <h1 class="text-6xl font-black mb-4 font-orbitron">OUR <span class="text-indigo-500">CAPABILITIES</span></h1>
+        <p class="text-gray-400 mb-12 max-w-2xl">High-end solutions for brands that demand attention.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card p-8 rounded-xl service-card">
+                <div class="text-4xl mb-4">🚀</div>
+                <h3 class="text-2xl font-bold mb-2">3D Web Experiences</h3>
+                <p class="text-gray-400 text-sm">Interactive WebGL, Three.js implementations that bring products to life.</p>
+            </div>
+            <div class="glass-card p-8 rounded-xl service-card">
+                <div class="text-4xl mb-4">💻</div>
+                <h3 class="text-2xl font-bold mb-2">Full Stack Dev</h3>
+                <p class="text-gray-400 text-sm">Robust backends with Node.js/Python and reactive frontends with React.</p>
+            </div>
+            <div class="glass-card p-8 rounded-xl service-card">
+                <div class="text-4xl mb-4">📱</div>
+                <h3 class="text-2xl font-bold mb-2">Mobile Apps</h3>
+                <p class="text-gray-400 text-sm">Flutter & React Native solutions for iOS and Android.</p>
+            </div>
+            <div class="glass-card p-8 rounded-xl service-card">
+                <div class="text-4xl mb-4">🎨</div>
+                <h3 class="text-2xl font-bold mb-2">UI/UX Design</h3>
+                <p class="text-gray-400 text-sm">Futuristic interfaces designed for maximum user retention.</p>
+            </div>
+            <div class="glass-card p-8 rounded-xl service-card">
+                <div class="text-4xl mb-4">☁️</div>
+                <h3 class="text-2xl font-bold mb-2">Cloud Solutions</h3>
+                <p class="text-gray-400 text-sm">AWS & Azure architecture for scalable enterprise systems.</p>
+            </div>
+            <div class="glass-card p-8 rounded-xl service-card">
+                <div class="text-4xl mb-4">🤖</div>
+                <h3 class="text-2xl font-bold mb-2">AI Integration</h3>
+                <p class="text-gray-400 text-sm">Chatbots, ML models, and smart automation for business.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Animations
+        gsap.from(".service-card", {
+            y: 100, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power2.out"
+        });
+
+        // Cursor logic (same as other pages)
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+        window.addEventListener("mousemove", (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
