@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | KDJ DOOM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #050505; color: white; font-family: 'Rajdhani', sans-serif; cursor: none; }
+        .project-card { position: relative; overflow: hidden; height: 300px; border-radius: 10px; cursor: pointer; }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; opacity: 0.6; }
+        .project-card:hover img { transform: scale(1.1); opacity: 0.3; }
+        .project-info { position: absolute; bottom: 0; left: 0; padding: 20px; transform: translateY(100px); transition: 0.3s; }
+        .project-card:hover .project-info { transform: translateY(0); }
+        
+        /* Cursor Styles */
+        .cursor-dot, .cursor-outline { position: fixed; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 9999; }
+        .cursor-dot { width: 8px; height: 8px; background: #6366f1; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(99, 102, 241, 0.5); }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-black bg-opacity-80">
+        <a href="index.html" class="text-2xl font-bold font-orbitron text-white">KDJ<span class="text-indigo-500">DOOM</span></a>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+            <a href="index.html" class="hover:text-indigo-400">Home</a>
+            <a href="about.html" class="hover:text-indigo-400">About</a>
+            <a href="services.html" class="hover:text-indigo-400">Services</a>
+            <a href="projects.html" class="text-indigo-500 font-bold">Projects</a>
+            <a href="contact.html" class="hover:text-indigo-400">Contact</a>
+        </div>
+    </nav>
+
+    <section class="min-h-screen pt-32 px-6 max-w-7xl mx-auto">
+        <h1 class="text-6xl font-black mb-12 font-orbitron text-right">SELECTED <span class="text-indigo-500">WORKS</span></h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="project-card bg-gray-900 border border-gray-800">
+                <img src="https://source.unsplash.com/random/800x600/?cyberpunk" alt="Project 1">
+                <div class="project-info">
+                    <h3 class="text-2xl font-bold text-white">Neon City</h3>
+                    <p class="text-indigo-400 text-sm">3D Web Experience</p>
+                </div>
+            </div>
+             <div class="project-card bg-gray-900 border border-gray-800">
+                <img src="https://source.unsplash.com/random/800x600/?technology" alt="Project 2">
+                <div class="project-info">
+                    <h3 class="text-2xl font-bold text-white">FinTech Core</h3>
+                    <p class="text-indigo-400 text-sm">Banking App Dashboard</p>
+                </div>
+            </div>
+             <div class="project-card bg-gray-900 border border-gray-800">
+                <img src="https://source.unsplash.com/random/800x600/?code" alt="Project 3">
+                <div class="project-info">
+                    <h3 class="text-2xl font-bold text-white">AI Vision</h3>
+                    <p class="text-indigo-400 text-sm">Machine Learning Interface</p>
+                </div>
+            </div>
+             <div class="project-card bg-gray-900 border border-gray-800">
+                <img src="https://source.unsplash.com/random/800x600/?digital" alt="Project 4">
+                <div class="project-info">
+                    <h3 class="text-2xl font-bold text-white">KDJ Portfolio</h3>
+                    <p class="text-indigo-400 text-sm">Interactive Website</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        gsap.from(".project-card", { scale: 0.9, opacity: 0, duration: 1, stagger: 0.2, ease: "power2.out" });
+        
+        // Cursor Logic
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+        window.addEventListener("mousemove", (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
