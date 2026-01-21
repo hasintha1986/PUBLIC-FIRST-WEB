@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | KDJ DOOM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #050505; color: white; font-family: 'Rajdhani', sans-serif; cursor: none; overflow-x: hidden; }
+        h1, h2 { font-family: 'Orbitron', sans-serif; }
+        .cursor-dot, .cursor-outline { position: fixed; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: 9999; }
+        .cursor-dot { width: 8px; height: 8px; background: #6366f1; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(99, 102, 241, 0.5); transition: 0.2s; }
+        #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; opacity: 0.4; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+    <div id="canvas-container"></div>
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center glass-card">
+        <a href="index.html" class="text-2xl font-bold text-white tracking-tighter">KDJ<span class="text-indigo-500">DOOM</span></a>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+            <a href="index.html" class="hover:text-indigo-400 transition-colors">Home</a>
+            <a href="about.html" class="text-indigo-500 font-bold">About</a>
+            <a href="services.html" class="hover:text-indigo-400 transition-colors">Services</a>
+            <a href="projects.html" class="hover:text-indigo-400 transition-colors">Projects</a>
+            <a href="contact.html" class="hover:text-indigo-400 transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <section class="min-h-screen pt-32 px-6 max-w-7xl mx-auto">
+        <h1 class="text-6xl md:text-8xl font-black mb-10 gs-reveal">OUR <span class="text-indigo-500">DNA</span></h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="glass-card p-8 rounded-xl gs-reveal">
+                <h3 class="text-2xl font-bold mb-4 text-indigo-400">THE ORIGIN</h3>
+                <p class="text-gray-300 leading-relaxed text-lg">
+                    KDJ DOOM wasn't built in a boardroom. It was forged in the code editors of visionaries who refused to accept the web as a static medium. We believe in movement, depth, and immersion.
+                </p>
+            </div>
+            <div class="glass-card p-8 rounded-xl gs-reveal">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400">THE MISSION</h3>
+                <p class="text-gray-300 leading-relaxed text-lg">
+                    To annihilate boring websites. We combine cutting-edge WebGL technology with robust backend systems to create digital experiences that feel like the future.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 text-center">
+            <div class="gs-stat">
+                <div class="text-5xl font-bold text-white">50+</div>
+                <div class="text-indigo-500 text-sm tracking-widest mt-2">PROJECTS</div>
+            </div>
+            <div class="gs-stat">
+                <div class="text-5xl font-bold text-white">100%</div>
+                <div class="text-indigo-500 text-sm tracking-widest mt-2">IMMERSION</div>
+            </div>
+             <div class="gs-stat">
+                <div class="text-5xl font-bold text-white">24/7</div>
+                <div class="text-indigo-500 text-sm tracking-widest mt-2">SUPPORT</div>
+            </div>
+             <div class="gs-stat">
+                <div class="text-5xl font-bold text-white">Top 1%</div>
+                <div class="text-indigo-500 text-sm tracking-widest mt-2">TALENT</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Copy the cursor and Three.js code from index.html here for full effect
+        // Simple GSAP for this page
+        gsap.from(".gs-reveal", { y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power2.out" });
+        gsap.from(".gs-stat", { scale: 0, opacity: 0, duration: 1, delay: 0.5, stagger: 0.1, ease: "back.out" });
+        
+        // Cursor Logic
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+        window.addEventListener("mousemove", (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+
+        // Basic 3D Background (Simplified for sub-pages)
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+        
+        const geo = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+        const mat = new THREE.MeshBasicMaterial({ color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.1 });
+        const mesh = new THREE.Mesh(geo, mat);
+        scene.add(mesh);
+        camera.position.z = 30;
+        
+        function animate() { requestAnimationFrame(animate); mesh.rotation.x += 0.001; mesh.rotation.y += 0.002; renderer.render(scene, camera); }
+        animate();
+    </script>
+</body>
+</html>
